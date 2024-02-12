@@ -21,37 +21,60 @@ function genererWorks(works){
 
 genererWorks(works);
 
+/** 
+const radioAll = document.getElementById("all");
 
-const buttonAll = document.getElementById("all");
-
-buttonAll.addEventListener("click", function () {
+radioAll.addEventListener("click", function () {
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(works);
 });
 
-const buttonTrinkets = document.getElementById("trinkets");
+const radioTrinkets = document.getElementById("trinkets");
 
-buttonTrinkets.addEventListener("click", function () {
+radioTrinkets.addEventListener("click", function () {
     const workfilter = works.filter((work) => work.categoryId == 1);
 
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(workfilter);
 });
 
-const buttonFlats = document.getElementById("flats");
+const radioFlats = document.getElementById("flats");
 
-buttonFlats.addEventListener("click", function () {
+radioFlats.addEventListener("click", function () {
     const workfilter = works.filter((work) => work.categoryId == 2);
 
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(workfilter);
 });
 
-const buttonBuildings = document.getElementById("buildings");
+const radioBuildings = document.getElementById("buildings");
 
-buttonBuildings.addEventListener("click", function () {
+radioBuildings.addEventListener("click", function () {
     const workfilter = works.filter((work) => work.categoryId == 3);
 
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(workfilter);
 });
+**/
+
+let radioFilters = document.querySelectorAll('.filters input');
+for (let index = 0; index < radioFilters.length; index++) {
+    radioFilters[index].addEventListener("change", (event) => {
+        if (event.target.value === "0") {
+            document.querySelector(".gallery").innerHTML = "";
+            genererWorks(works);
+        }   else if (event.target.value === "1") {
+            const workfilter = works.filter((work) => work.categoryId == 1);
+            document.querySelector(".gallery").innerHTML = "";
+            genererWorks(workfilter);
+        }   else if (event.target.value === "2") {
+            const workfilter = works.filter((work) => work.categoryId == 2);
+            document.querySelector(".gallery").innerHTML = "";
+            genererWorks(workfilter);
+        }   else {
+            const workfilter = works.filter((work) => work.categoryId == 3);
+            document.querySelector(".gallery").innerHTML = "";
+            genererWorks(workfilter);
+        };
+    });
+};

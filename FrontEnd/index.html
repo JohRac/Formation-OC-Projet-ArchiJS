@@ -37,11 +37,15 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-		<div class="filter">
-			<button id="all">Tous</button>
-			<button id="trinkets">Objets</button>
-			<button id="flats">Appartements</button>
-			<button id="buildings">Hôtels & restaurants</button>
+		<div class="filters">
+			<input type="radio" class="radioFilter" id="all" name="filter" value="0">
+			<label for="all">Tous</label>
+			<input type="radio" class="radioFilter" id="trinkets" name="filter" value="1">
+			<label for="trinkets">Objets</label>
+			<input type="radio" class="radioFilter" id="flats" name="filter" value="2">
+			<label for="flats">Appartements</label>
+			<input type="radio" class="radioFilter" id="buildings" name="filter" value="3">
+			<label for="buildings">Hôtels & restaurants</label>
 		</div>
 		<div class="gallery">
 		</div>

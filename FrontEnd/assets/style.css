@@ -131,10 +131,39 @@ li:hover, li a:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.filters {
+    display: flex;
+    gap: 15px;
+	justify-content: center;
+	margin-bottom: 60px;
+
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.filters label {
+    font-size: 17px;
+	padding: 12px 20px;
+    border-radius: 25px;
+    background-color: white;
+	border: 1px solid #1D6154;
+	color: #1D6154;
+}
+
+input[type="radio"].radioFilter:hover + label, input[type="radio"].radioFilter:checked + label {
+    background-color: #1D6154;
+	border: 1px solid #1D6154;
+	color: white;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
