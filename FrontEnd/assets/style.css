@@ -158,9 +158,16 @@ input[type="radio"] {
 	color: #1D6154;
 }
 
-input[type="radio"].radioFilter:hover + label, input[type="radio"].radioFilter:checked + label {
-    background-color: #1D6154;
+input[type="radio"].radioFilter:hover + label {
+	background-color: #1D6154;
+	opacity: 55%;
 	border: 1px solid #1D6154;
+	color: white;
+}
+
+input[type="radio"].radioFilter:checked + label {
+    background-color: #1D6154;
+	border: 1px solid #1D6154; /*ATTENTION HOVER superpose le CHECKED*/
 	color: white;
 }
 
@@ -221,6 +228,13 @@ input[type="submit"]{
 
 #login p {
 	text-align: center;
+}
+
+.errorMessage {
+	font-size: 17px;
+	color: red;
+	font-weight: bold;
+	padding-bottom: 10px;
 }
 
 footer nav ul {

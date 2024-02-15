@@ -12,20 +12,44 @@ loginClient.addEventListener("submit", async function (event) {
         headers: { "Content-Type": "application/json" },
         body: loginCharge
     });
+    await fetch("http://localhost:5678/api/users/login")
+        .then(response => {
+            if (response.status == 200) {
+            window.localStorage.setItem("token", body.token );
+            window.location.href="./index.html";
+            } else {
+                let errorMessage = document.querySelector(".errorMessage"); 
+                if (!errorMessage) {
+                    errorMessage = document.createElement("p");
+                    errorMessage.classList.add('errorMessage')
+                    errorMessage.innerText = "Erreur dans l'identifiant ou le mot de passe";
+                    let forgotPassword = document.getElementById("forgotPassword") 
+                    forgotPassword.insertBefore(errorMessage, forgotPassword.firstChild); 
+                }
+        }});
     const body = await user.json();
     console.log(body)
+    console.log(user)
 });
 
 
 
-/*fetch("http://localhost:5678/api/users/login")
-    .then(response => {
-        if (response.status == 200) {
-        window.localStorage.setItem("token", body.token );
-        window.location.href="./index.html";
-        } else {
-        let errorSection = document.querySelector(".loginSubmit");
-        let errorMessage = document.createElement("p");
-        errorMessage.innerText = "Erreur dans l'identifiant ou le mot de passe";
-        errorSection.appendChild(errorMessage);
-    }});*/
+
+
+
+
+
+/*await fetch("http://localhost:5678/api/users/login")
+        .then(response => {
+            if (response.status == 200) {
+            window.localStorage.setItem("token", body.token );
+            window.location.href="./index.html";
+            } else {
+            let errorMessage = document.createElement("p");
+            errorMessage.classList.add('errorMessage')
+            errorMessage.innerText = "Erreur dans l'identifiant ou le mot de passe";
+            let forgotPassword = document.getElementById("forgotPassword") 
+            forgotPassword.insertBefore(errorMessage, forgotPassword.firstChild);
+        }});*/
+
+
