@@ -1,3 +1,5 @@
+import { editPage } from "./edit.js";
+
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
@@ -78,3 +80,7 @@ for (let index = 0; index < radioFilters.length; index++) {
         };
     });
 };
+
+if(localStorage.getItem('tokenID')) {
+    editPage()
+}
