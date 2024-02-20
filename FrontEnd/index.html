@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modal.css">	
 	<script type="module" src="works.js"></script>
 </head>
 <body>
@@ -19,7 +20,7 @@
 		<ul>
 			<li><a href="./index.html">projets</a></li>
 			<li><a href ="#contact">contact</a></li>
-			<li><a href ="./client.html">login</a></li>
+			<li><a href ="./client.html" id="loginButton">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -50,6 +51,12 @@
 		</div>
 		<div class="gallery">
 		</div>
+		<aside id="modal" aria-hidden="true" role="dialog" style="display: none;">
+			<div id="divModal">
+				<p>coucou c'est moi</p>
+				<button class="XModal">Fermer</button>
+			</div>
+		</aside>
 	</section>
 	<section id="contact">
 		<h2>Contact</h2>

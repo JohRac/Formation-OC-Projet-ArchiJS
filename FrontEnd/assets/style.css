@@ -165,13 +165,18 @@ li:hover, li a:hover {
 	gap: 20px;
 }
 
-.modaleDiv {
+.modifyDiv {
+  	display: flex;
+}
+
+.modifyDiv a {
 	color: black;
   	display: flex;
   	font-size: 13px;
   	gap: 15px;
-	align-items: center;
-	font-weight: 400;
+  	align-items: center;
+  	font-weight: 400;
+  	text-decoration: none;
 }
 
 .filters {

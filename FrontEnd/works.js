@@ -1,4 +1,4 @@
-import { editPage } from "./edit.js";
+import { editPage, openModal } from "./edit.js";
 
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
@@ -83,4 +83,9 @@ for (let index = 0; index < radioFilters.length; index++) {
 
 if(localStorage.getItem('tokenID')) {
     editPage()
-}
+};
+
+/*editPage();*/
+
+const modalLink = document.getElementById("modalLink");
+modalLink.addEventListener("click", openModal);
