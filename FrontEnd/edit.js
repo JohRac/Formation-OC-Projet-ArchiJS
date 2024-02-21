@@ -1,3 +1,5 @@
+import { displayWorks, works } from "./works.js";
+
 export function editPage() {
     let iconHeader = document.createElement("i");
     iconHeader.classList.add("far", "fa-pen-to-square");
@@ -42,21 +44,49 @@ export function editPage() {
 
 
 export function openModal(event) {
-    let window = null
+    
+    displayWorks(works, true)
+
+    let iconCloseModal = document.querySelector(".XModal")
+    if (!iconCloseModal) {
+        iconCloseModal = document.createElement("i")
+        iconCloseModal.classList.add("fas", "xmark")
+        iconCloseModal.classList.add("XModal")
+        let titleModal = document.getElementById("titleModal")
+        titleModal.parentNode.insertBefore(iconCloseModal, titleModal);
+    }
+
+
+    const stopPropagation = function (event) {
+        event.stopPropagation()
+    }
+
+    let windowModal = null
     event.preventDefault()
     modal.style.display = null
     modal.removeAttribute("aria-hidden")
-    window = modal
+    windowModal = modal
     modal.addEventListener("click", closeModal)
-    modal.querySelector(".XModal").addEventListener("click", closeModal)
+    modal.querySelector(".modalStop").addEventListener("click", stopPropagation)
 
     function closeModal(event) {
-        if (window === null) return
+        if (windowModal === null) return
         event.preventDefault()
-        modal.style.display = "none"
+        window.setTimeout(function () {
+            modal.style.display = "none"
+            windowModal = null
+        }, 500)
         modal.setAttribute("aria-hidden", true)
         modal.removeEventListener("click", closeModal)
-        modal.querySelector(".XModal").removeEventListener("click", closeModal)
-        window = null
+        modal.querySelector(".modalStop").removeEventListener("click", stopPropagation)
+        document.querySelector(".gridModal").innerHTML = "";
     }
+
+    window.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" || event.key === "Esc") {
+            closeModal(event)
+        }
+    })
+
+    
 }

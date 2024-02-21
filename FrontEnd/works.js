@@ -1,27 +1,40 @@
 import { editPage, openModal } from "./edit.js";
 
 const reponse = await fetch("http://localhost:5678/api/works");
-const works = await reponse.json();
+export const works = await reponse.json();
 
-function genererWorks(works){
+export function displayWorks(works, modalGallery=false){
     for (let i = 0; i < works.length; i++) {
         
         const work = works[i];
-
-        const sectionGallery = document.querySelector(".gallery");
-        const workElement = document.createElement("work");
+        let sectionGallery = null
+        const workElement = document.createElement("div");
+        workElement.classList.add("work")
         const ImageElement = document.createElement("img");
         ImageElement.src = work.imageUrl;
-        const TitleElement = document.createElement("p");
-        TitleElement.innerText = work.title;
 
-        sectionGallery.appendChild(workElement);
-        workElement.appendChild(ImageElement);
-        workElement.appendChild(TitleElement);
+        if (modalGallery) {
+            sectionGallery = document.querySelector(".gridModal")
+            let deleteElement = document.createElement("i")
+            deleteElement.classList.add("fas", "trash-can")
+            sectionGallery.appendChild(workElement);
+            workElement.appendChild(ImageElement);
+            workElement.appendChild(deleteElement)
+
+        } else {
+            sectionGallery = document.querySelector(".gallery");
+            const TitleElement = document.createElement("p");
+            TitleElement.innerText = work.title;
+
+            sectionGallery.appendChild(workElement);
+            workElement.appendChild(ImageElement);
+            workElement.appendChild(TitleElement);
+        }
     };
+    
 };
 
-genererWorks(works);
+displayWorks(works);
 
 /** 
 const radioAll = document.getElementById("all");
@@ -64,28 +77,28 @@ for (let index = 0; index < radioFilters.length; index++) {
     radioFilters[index].addEventListener("change", (event) => {
         if (event.target.value === "0") {
             document.querySelector(".gallery").innerHTML = "";
-            genererWorks(works);
+            displayWorks(works);
         }   else if (event.target.value === "1") {
             const workfilter = works.filter((work) => work.categoryId == 1);
             document.querySelector(".gallery").innerHTML = "";
-            genererWorks(workfilter);
+            displayWorks(workfilter);
         }   else if (event.target.value === "2") {
             const workfilter = works.filter((work) => work.categoryId == 2);
             document.querySelector(".gallery").innerHTML = "";
-            genererWorks(workfilter);
+            displayWorks(workfilter);
         }   else {
             const workfilter = works.filter((work) => work.categoryId == 3);
             document.querySelector(".gallery").innerHTML = "";
-            genererWorks(workfilter);
+            displayWorks(workfilter);
         };
     });
 };
 
 if(localStorage.getItem('tokenID')) {
     editPage()
+    const modalLink = document.getElementById("modalLink");
+    modalLink.addEventListener("click", openModal);
 };
 
-/*editPage();*/
 
-const modalLink = document.getElementById("modalLink");
-modalLink.addEventListener("click", openModal);
+
