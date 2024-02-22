@@ -44,18 +44,9 @@ export function editPage() {
 
 
 export function openModal(event) {
-    
+    document.querySelector("#displayModal").style.display = "inherit"
+
     displayWorks(works, true)
-
-    let iconCloseModal = document.querySelector(".XModal")
-    if (!iconCloseModal) {
-        iconCloseModal = document.createElement("i")
-        iconCloseModal.classList.add("fas", "xmark")
-        iconCloseModal.classList.add("XModal")
-        let titleModal = document.getElementById("titleModal")
-        titleModal.parentNode.insertBefore(iconCloseModal, titleModal);
-    }
-
 
     const stopPropagation = function (event) {
         event.stopPropagation()
@@ -67,6 +58,7 @@ export function openModal(event) {
     modal.removeAttribute("aria-hidden")
     windowModal = modal
     modal.addEventListener("click", closeModal)
+    modal.querySelector(".closeModal").addEventListener("click", closeModal)
     modal.querySelector(".modalStop").addEventListener("click", stopPropagation)
 
     function closeModal(event) {
@@ -78,6 +70,7 @@ export function openModal(event) {
         }, 500)
         modal.setAttribute("aria-hidden", true)
         modal.removeEventListener("click", closeModal)
+        modal.querySelector(".closeModal").addEventListener("click", closeModal)
         modal.querySelector(".modalStop").removeEventListener("click", stopPropagation)
         document.querySelector(".gridModal").innerHTML = "";
     }
@@ -88,5 +81,58 @@ export function openModal(event) {
         }
     })
 
+    function previous() { 
+        
+        let previousPage = document.querySelector(".previousPage")
+        if (!previousPage) {
+                
+            previousPage = document.createElement("i")
+            previousPage.classList.add("fa-solid", "fa-arrow-left")
+            previousPage.classList.add("previousPage")
+            let iconCloseModal = document.querySelector(".closeModal")
+            iconCloseModal.parentNode.insertBefore(previousPage, iconCloseModal);
+        }
+        previousPage.addEventListener("click", function () {
+            document.querySelector("#displayModal").style.display = "inherit";
+            previousPage.remove()
+        })
+        
+    }
+
+    function newProject() {
+        previous()
+        document.querySelector("#displayModal").style.display = "none";
+
+    }
+    let addWork = document.querySelector(".addWork");
+    addWork.addEventListener("click", newProject)
     
+    let deleteWorks = document.querySelectorAll(".deleteWork")
+    let tokenID = localStorage.getItem("tokenID")
+
+    for (let i = 0; i < deleteWorks.length; i++) {
+        deleteWorks[i].addEventListener("click", async function () {
+
+            const workDiv = deleteWorks[i].parentNode
+            const workId = workDiv.getAttribute("id")
+
+            const deleteResponse = await fetch(`http://localhost:5678/api/works/${workId}`, {
+            method: "DELETE",
+            headers: { 
+                accept: "*/*",
+                Authorization: `Bearer ${tokenID}`}
+            })
+
+            console.log(deleteResponse)
+            if (deleteResponse.status === 200) {
+                deleteWorks[i].parentNode.remove()
+                window.location.href="./index.html";
+            } else {
+                alert("La photo n'a pas été supprimée avec succès")
+            }
+
+            deleteWorks[i].parentNode.remove()
+
+        });
+    }
 }

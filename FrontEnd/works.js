@@ -16,10 +16,12 @@ export function displayWorks(works, modalGallery=false){
         if (modalGallery) {
             sectionGallery = document.querySelector(".gridModal")
             let deleteElement = document.createElement("i")
-            deleteElement.classList.add("fas", "trash-can")
+            deleteElement.classList.add("fa-solid", "fa-trash-can")
+            deleteElement.classList.add("deleteWork")
             sectionGallery.appendChild(workElement);
             workElement.appendChild(ImageElement);
             workElement.appendChild(deleteElement)
+            workElement.id = work.id
 
         } else {
             sectionGallery = document.querySelector(".gallery");
@@ -35,42 +37,6 @@ export function displayWorks(works, modalGallery=false){
 };
 
 displayWorks(works);
-
-/** 
-const radioAll = document.getElementById("all");
-
-radioAll.addEventListener("click", function () {
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(works);
-});
-
-const radioTrinkets = document.getElementById("trinkets");
-
-radioTrinkets.addEventListener("click", function () {
-    const workfilter = works.filter((work) => work.categoryId == 1);
-
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(workfilter);
-});
-
-const radioFlats = document.getElementById("flats");
-
-radioFlats.addEventListener("click", function () {
-    const workfilter = works.filter((work) => work.categoryId == 2);
-
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(workfilter);
-});
-
-const radioBuildings = document.getElementById("buildings");
-
-radioBuildings.addEventListener("click", function () {
-    const workfilter = works.filter((work) => work.categoryId == 3);
-
-    document.querySelector(".gallery").innerHTML = "";
-    genererWorks(workfilter);
-});
-**/
 
 let radioFilters = document.querySelectorAll('.filters input');
 for (let index = 0; index < radioFilters.length; index++) {
@@ -99,6 +65,5 @@ if(localStorage.getItem('tokenID')) {
     const modalLink = document.getElementById("modalLink");
     modalLink.addEventListener("click", openModal);
 };
-
 
 
