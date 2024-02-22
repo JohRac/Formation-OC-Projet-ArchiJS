@@ -14,11 +14,8 @@ loginClient.addEventListener("submit", async function (event) {
         body: loginCharge
     })
 
-    console.log(user)
-
     try {
         const userBody = await user.json()
-        console.log(userBody.token)
         if (user.status === 200) {
             window.localStorage.setItem("tokenID", userBody.token );
             window.location.href="./index.html";
