@@ -267,6 +267,7 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 	border: none;
+	cursor: pointer;
 }
 
 #login p {
