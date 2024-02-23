@@ -50,7 +50,7 @@
 
 #divModal .closeModal {
     text-align: end;
-    font-size: 13px;
+    font-size: 14px;
     margin: 20px 20px 0px 0px;
     cursor: pointer;
 
@@ -58,7 +58,7 @@
 
 #divModal .previousPage {
     position: absolute;
-    font-size: 13px;
+    font-size: 18px;
     margin: 20px 0px 0px 20px;
     cursor: pointer;
 }
@@ -102,6 +102,18 @@
     animation-name: slideToBottom;
 }
 
+.divForm form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 105px 0px;
+    gap: 20px;
+
+}
+
+.divForm form i {
+    font-size: 64px;
+    color: #B9C5CC;
+}
 
 @keyframes fadeIn {
     from { opacity: 0; }

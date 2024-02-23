@@ -102,8 +102,79 @@ export function openModal(event) {
     function newProject() {
         previous()
         document.querySelector("#displayModal").style.display = "none";
+        let divForm = document.createElement("div")
+        divForm.classList.add("divForm")
+        document.querySelector("#divModal").appendChild(divForm)
+        let titleForm = document.createElement("h1")
+        titleForm.innerText = "Ajout photo"
+        titleForm.classList.add("titleForm")
+        divForm.appendChild(titleForm)
+        let form = document.createElement ("form");
+        form.id = "formProject";
 
+        let imgI = document.createElement("i")
+        imgI.classList.add("far", "fa-image");
+        form.appendChild(imgI);
+        let imgForm = document.createElement("label");
+        imgForm.for = "imgForm";
+        form.appendChild(imgForm);
+
+        let imgInput = document.createElement("input");
+        imgInput.type = "file";
+        imgInput.id = "imgForm";
+        imgInput.name = "image";
+        imgInput.accept = "image/*"
+        
+        form.appendChild(imgInput);
+
+        let titleProject = document.createElement ("label");
+        titleProject.for = "titleProject";
+        titleProject.innerText = "Titre"
+        form.appendChild(titleProject);
+
+        let titleInput = document.createElement("input");
+        titleInput.type = "text";
+        titleInput.id = "titleProject";
+        titleInput.name = "title";
+        form.appendChild(titleInput);
+
+        let categoryForm = document.createElement("label");
+        categoryForm.for = "categoryForm";
+        categoryForm.innerText = "Catégorie";
+        form.appendChild(categoryForm);
+
+        let categorySelect = document.createElement("select");
+        categorySelect.id = "categoryForm";
+        categorySelect.name = "category";
+
+        fetch("http://localhost:5678/api/categories")
+        .then(response => response.json())
+        .then(categories => {
+            for (let i = 0; i < categories.length; i++) {
+                let cat = categories[i];
+                let option = document.createElement("option");
+                option.value = cat.id;
+                option.innerText = cat.name;
+                categorySelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des catégories:', error);
+        });
+        form.appendChild(categorySelect);
+
+        let hrForm = document.createElement("hr");
+        form.appendChild(hrForm)
+
+        let submitForm = document.createElement('input');
+        submitForm.type = 'submit';
+        submitForm.value = 'Valider';
+        submitForm.id = 'submitForm';
+        form.appendChild(submitForm);
+
+        divForm.appendChild(form)
     }
+
     let addWork = document.querySelector(".addWork");
     addWork.addEventListener("click", newProject)
     
