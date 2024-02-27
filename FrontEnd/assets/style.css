@@ -243,7 +243,7 @@ margin: auto;
 	flex-direction: column;
 }
 
-#contact input, #login input {
+#contact input, #login input  {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;

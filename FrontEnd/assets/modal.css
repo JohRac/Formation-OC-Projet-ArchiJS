@@ -38,7 +38,7 @@
 
 #divModal hr {
     width: 420px;
-    border-width: 1px;
+    border-width: 1px 0px 0px 0px;
     color: #B3B3B3;
 }
 
@@ -50,8 +50,8 @@
 
 #divModal .closeModal {
     text-align: end;
-    font-size: 14px;
-    margin: 20px 20px 0px 0px;
+    font-size: 18px;
+    margin: 30px 30px 0px 0px;
     cursor: pointer;
 
 }
@@ -59,7 +59,7 @@
 #divModal .previousPage {
     position: absolute;
     font-size: 18px;
-    margin: 20px 0px 0px 20px;
+    margin: 30px 0px 0px 30px;
     cursor: pointer;
 }
 
@@ -102,6 +102,11 @@
     animation-name: slideToBottom;
 }
 
+.divForm {
+    display: flex;
+    flex-direction: column;
+}
+
 .divForm form {
     display: flex;
     flex-direction: column;
@@ -113,6 +118,63 @@
 .divForm form i {
     font-size: 64px;
     color: #B9C5CC;
+}
+
+.divAddImg {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: #E8F1F6 solid 0px;
+    background: #E8F1F6;
+    border-radius: 3px;
+}
+
+.divInput {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    text-align: center;
+}
+.divInput p {
+    font-size: 10px;
+}
+
+.imgInput {
+    display: none;
+}
+
+.imgLabel {
+    background-color: #CBD6DC;
+    color: #306685;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    width: 50%;
+    margin-left: 80px;
+}
+
+
+.previewDiv img {
+    height: 200px;
+    width: 30% !important; 
+}
+
+#titleInput, #categorySelect {
+    height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    padding: 0px 0px 0px 15px !important;    
+}
+
+
+
+#categorySelect {
+    background-color: white;
+    border-right: 20px solid white;
+    margin-bottom: 15px;
 }
 
 @keyframes fadeIn {
