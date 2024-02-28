@@ -56,22 +56,33 @@ function previous() {
     }
     previousPage.addEventListener("click", function () {
         document.querySelector("#displayModal").style.display = "inherit";
-        document.querySelector(".divForm").style.display = "none";
+        document.querySelector(".divForm").remove()
         previousPage.remove()
     })
     
 }
 
 function checkFormValidity() {
-    const fileInput = document.getElementById('fileInput');
+    const fileInput = document.querySelector('.imgInput');
     const titleInput = document.getElementById('titleInput');
     const categorySelect = document.getElementById('categorySelect');
     const submitButton = document.getElementById('submitButton');
+    let errorMessage = document.querySelector(".errorMessage");
   
     if (fileInput.files.length > 0 && titleInput.value.trim() !== '' && categorySelect.value !== '') {
-      submitButton.removeAttribute('disabled');
+        submitButton.removeAttribute('disabled');
+        if (errorMessage) {
+            errorMessage.remove()
+        }
     } else {
-      submitButton.setAttribute('disabled', true);
+        submitButton.setAttribute('disabled', true);
+        if (!errorMessage) {
+            errorMessage = document.createElement("p");
+            errorMessage.classList.add('errorMessage')
+            errorMessage.innerText = "Attention le formulaire n'est pas correctement rempli ";
+            submitButton.parentNode.insertBefore(errorMessage, submitButton); 
+        }
+        
     }
 }
 
@@ -144,8 +155,6 @@ function newWork() {
             }
         })
 
-
-
         let titleProject = document.createElement ("label");
         titleProject.for = "titleProject";
         titleProject.innerText = "Titre"
@@ -205,35 +214,23 @@ function newWork() {
         divForm.appendChild(form)
     }
 
-    checkFormValidity()
+    document.getElementById("formProject").addEventListener("change", checkFormValidity)
 
-    document.querySelector(".divForm").style.display = "inherit";
-
-    console.log("we entered the form")
-
-    const formNewWork = document.querySelector(".submitWork")
-
-    console.log(formNewWork)
+    const formNewWork = document.querySelector("#formProject")
 
     formNewWork.addEventListener("submit", submitNewWork)
     
 }
 
-
-
 async function submitNewWork(event) {
-
-    console.log("we clicked the button")
 
     event.preventDefault();
     
     const workForm = new FormData();
 
-    workForm.append("image", document.getElementById("imgForm").files[0]);
-    workForm.append("title", document.getElementById("titleProject").value);
-    workForm.append("category", document.getElementById("categoryForm").value);
-
-    console.log(workForm)
+    workForm.append("image", document.querySelector(".imgInput").files[0]);
+    workForm.append("title", document.getElementById("titleInput").value);
+    workForm.append("category", document.getElementById("categorySelect").value);
 
     const formResponse = await fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -241,16 +238,17 @@ async function submitNewWork(event) {
         body: workForm
     })
 
-    console.log(formResponse)
+    event.preventDefault();
 
-    const formResponseBody = await formResponse.json()
-    if (formResponseBody.status === 201) {
-        console.log("tout va bien")
+    if (formResponse.ok) {
+        console.log("coucou")
+
     } else {
         alert("Le Projet n'a pas pu être rajouté avec succès")
-        console.log("raté ^^")
+        
     }
-    
+
+    event.preventDefault()
 }
 
 
@@ -284,7 +282,14 @@ export function openModal(event) {
         modal.querySelector(".closeModal").addEventListener("click", closeModal)
         modal.querySelector(".modalStop").removeEventListener("click", stopPropagation)
         document.querySelector(".gridModal").innerHTML = "";
-        document.querySelector(".divForm").style.display = "none";
+        let divForm = document.querySelector(".divForm")
+        if (divForm) {
+            divForm.remove()
+        }
+        let previousPage = document.querySelector(".previousPage")
+        if (previousPage) {
+            previousPage.remove()
+        }
     }
 
     window.addEventListener("keydown", function (event) {
@@ -297,10 +302,11 @@ export function openModal(event) {
     addWork.addEventListener("click", newWork)
     
     let deleteWorks = document.querySelectorAll(".deleteWork")
-    
 
     for (let i = 0; i < deleteWorks.length; i++) {
-        deleteWorks[i].addEventListener("click", async function () {
+        deleteWorks[i].addEventListener("click", async function (event) {
+
+            event.preventDefault()
 
             const workDiv = deleteWorks[i].parentNode
             const workId = workDiv.getAttribute("id")
@@ -312,10 +318,8 @@ export function openModal(event) {
                 Authorization: `Bearer ${tokenID}`}
             })
 
-            console.log(deleteResponse)
-            if (deleteResponse.status === 200) {
+            if (deleteResponse.ok) {
                 deleteWorks[i].parentNode.remove()
-                window.location.href="./index.html";
             } else {
                 alert("La photo n'a pas été supprimée avec succès")
             }
@@ -324,5 +328,4 @@ export function openModal(event) {
 
         });
     }
-
 }

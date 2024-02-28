@@ -275,7 +275,7 @@ input[type="submit"]{
 }
 
 .errorMessage {
-	font-size: 17px;
+	font-size: 13px;
 	color: red;
 	font-weight: bold;
 	padding-bottom: 10px;

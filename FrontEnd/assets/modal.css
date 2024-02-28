@@ -151,13 +151,13 @@
     border-radius: 50px;
     cursor: pointer;
     display: inline-block;
-    width: 50%;
-    margin-left: 80px;
+    width: 38%;
+    margin-left: 105px;
 }
 
 
 .previewDiv img {
-    height: 200px;
+    height: 170px;
     width: 30% !important; 
 }
 
@@ -175,6 +175,14 @@
     background-color: white;
     border-right: 20px solid white;
     margin-bottom: 15px;
+}
+
+#submitButton {
+    margin: 0px auto;
+}
+
+#formProject input[type="submit"]:disabled {
+    background-color: #A7A7A7;
 }
 
 @keyframes fadeIn {
