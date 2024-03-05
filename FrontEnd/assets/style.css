@@ -205,12 +205,14 @@ input[type="radio"].radioFilter:hover + label {
 	opacity: 55%;
 	border: 1px solid #1D6154;
 	color: white;
+	cursor: pointer;
 }
 
 input[type="radio"].radioFilter:checked + label {
     background-color: #1D6154;
 	border: 1px solid #1D6154; /*ATTENTION HOVER superpose le CHECKED*/
 	color: white;
+	cursor: pointer;
 }
 
 .gallery {
