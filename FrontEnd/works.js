@@ -1,6 +1,7 @@
 import { editPage, openModal } from "./edit.js";
+import { getWork } from "./apiCall.js";
 
-const reponse = await fetch("http://localhost:5678/api/works");
+const reponse = await getWork()
 export const works = await reponse.json();
 
 export function displayWorks(works, modalGallery=false){
