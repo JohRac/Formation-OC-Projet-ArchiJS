@@ -1,0 +1,206 @@
+#modal {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    animation: fadeIn .3s both;
+}
+
+#divModal {
+    display: flex;
+    flex-direction: column;
+    width: 630px;
+    height: 670px;
+    background-color: white;
+    border-radius: 10px;
+    animation: slideFromTop .3s both;
+}
+
+#displayModal {
+    display: flex;
+    flex-direction: column;
+}
+
+#divModal h1 {
+    font-family: inherit;
+    font-size: 26px;
+    color: black;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 20px;
+
+}
+
+#divModal hr {
+    width: 420px;
+    border-width: 1px 0px 0px 0px;
+    color: #B3B3B3;
+}
+
+#divModal input {
+    width: auto;
+    font-size: 14px;
+    padding: 10px 50px;
+}
+
+#divModal .closeModal {
+    text-align: end;
+    font-size: 18px;
+    margin: 30px 30px 0px 0px;
+    cursor: pointer;
+
+}
+
+#divModal .previousPage {
+    position: absolute;
+    font-size: 18px;
+    margin: 30px 0px 0px 30px;
+    cursor: pointer;
+}
+
+.gridModal {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 2px;
+    grid-row-gap: 25px;
+    padding: 50px 105px 50px 105px;
+}
+
+.gridModal .work {
+    width: 75px;
+    height: 105px;
+    position: relative;
+}
+
+.gridModal .work i {
+    color: white;
+    background-color: black;
+    padding: 4px;
+    border-radius: 2px;
+    position: absolute;
+    top: 13%;
+    left: 84%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    cursor: pointer;
+}
+
+#divModal img {
+    width: 100%;
+}
+
+#modal[aria-hidden="true"] {
+    animation-name: fadeOut;
+}
+
+#modal[aria-hidden="true"] #divModal {
+    animation-name: slideToBottom;
+}
+
+.divForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.divForm form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 105px 0px;
+    gap: 20px;
+
+}
+
+.divForm form i {
+    font-size: 64px;
+    color: #B9C5CC;
+}
+
+.divAddImg {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: #E8F1F6 solid 0px;
+    background: #E8F1F6;
+    border-radius: 3px;
+}
+
+.divInput {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 10px;
+    text-align: center;
+}
+.divInput p {
+    font-size: 10px;
+}
+
+.imgInput {
+    display: none;
+}
+
+.imgLabel {
+    background-color: #CBD6DC;
+    color: #306685;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    width: 38%;
+    margin-left: 105px;
+}
+
+
+.previewDiv img {
+    height: 170px;
+    width: 30% !important; 
+}
+
+#titleInput, #categorySelect {
+    height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    padding: 0px 0px 0px 15px !important;    
+}
+
+
+
+#categorySelect {
+    background-color: white;
+    border-right: 20px solid white;
+    margin-bottom: 15px;
+}
+
+#submitButton {
+    margin: 0px auto;
+}
+
+#formProject input[type="submit"]:disabled {
+    background-color: #A7A7A7;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to {opacity: 1;}
+}
+
+@keyframes slideFromTop {
+    from { transform: translateX(-50px) translateY(-50px); }
+    to {transform: translateX(0px) translateY(0px); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to {opacity: 0;}
+}
+
+@keyframes slideToBottom {
+    from { transform: translateX(0px) translateY(0px); }
+    to {transform: translateX(50px) translateY(50px); }
+}
