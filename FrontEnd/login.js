@@ -1,3 +1,5 @@
+import { postUser } from "./apiCall.js";
+
 const loginClient = document.querySelector(".loginSubmit");
 
 loginClient.addEventListener("submit", async function (event) {
@@ -8,11 +10,8 @@ loginClient.addEventListener("submit", async function (event) {
         password: event.target.querySelector("[name=password]").value,
     };
     const loginCharge = JSON.stringify(loginID);
-    const user = await fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: loginCharge
-    })
+
+    const user = postUser(loginCharge)
 
     try {
         const userBody = await user.json()

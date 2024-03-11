@@ -1,6 +1,5 @@
 import { displayWorks, works } from "./works.js";
-
-let tokenID = localStorage.getItem("tokenID")
+import { postWork, deleteWork } from "./apiCall.js";
 
 export function editPage() {
     let iconHeader = document.createElement("i");
@@ -83,6 +82,26 @@ function checkFormValidity() {
             submitButton.parentNode.insertBefore(errorMessage, submitButton); 
         }
         
+    }
+}
+
+async function fetchCategories() {
+    try {
+      const response = await fetch("http://localhost:5678/api/categories");
+      if (!response.status === 200) {
+        throw new Error('Erreur lors de la récupération des catégories');
+      }
+      const categories = await response.json();
+      
+      for (let i = 0; i < categories.length; i++) {
+        let cat = categories[i];
+        let option = document.createElement("option");
+        option.value = cat.id;
+        option.innerText = cat.name;
+        categorySelect.appendChild(option);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la récupération des catégories:', error);
     }
 }
 
@@ -176,26 +195,6 @@ function newWork() {
         categorySelect.name = "category";
         categorySelect.required = true;
 
-        async function fetchCategories() {
-            try {
-              const response = await fetch("http://localhost:5678/api/categories");
-              if (!response.status === 200) {
-                throw new Error('Erreur lors de la récupération des catégories');
-              }
-              const categories = await response.json();
-              
-              for (let i = 0; i < categories.length; i++) {
-                let cat = categories[i];
-                let option = document.createElement("option");
-                option.value = cat.id;
-                option.innerText = cat.name;
-                categorySelect.appendChild(option);
-              }
-            } catch (error) {
-              console.error('Erreur lors de la récupération des catégories:', error);
-            }
-        }
-
         fetchCategories()
 
         form.appendChild(categorySelect);
@@ -232,23 +231,15 @@ async function submitNewWork(event) {
     workForm.append("title", document.getElementById("titleInput").value);
     workForm.append("category", document.getElementById("categorySelect").value);
 
-    const formResponse = await fetch("http://localhost:5678/api/works", {
-        method: "POST",
-        headers: {Authorization: `Bearer ${tokenID}`},
-        body: workForm
-    })
-
-    event.preventDefault();
+    const formResponse = postWork(workForm)
 
     if (formResponse.ok) {
-        console.log("coucou")
 
     } else {
         alert("Le Projet n'a pas pu être rajouté avec succès")
         
     }
 
-    event.preventDefault()
 }
 
 
@@ -311,12 +302,7 @@ export function openModal(event) {
             const workDiv = deleteWorks[i].parentNode
             const workId = workDiv.getAttribute("id")
 
-            const deleteResponse = await fetch(`http://localhost:5678/api/works/${workId}`, {
-            method: "DELETE",
-            headers: { 
-                accept: "*/*",
-                Authorization: `Bearer ${tokenID}`}
-            })
+            const deleteResponse = deleteWork(workId)
 
             if (deleteResponse.ok) {
                 deleteWorks[i].parentNode.remove()
