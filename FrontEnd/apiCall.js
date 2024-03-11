@@ -8,6 +8,14 @@ export async function postUser(body) {
     })
 }
 
+export async function getWork() {
+    return await fetch("http://localhost:5678/api/works");
+}
+
+export async function getCategories() {
+    return await fetch("http://localhost:5678/api/categories");
+}
+
 export async function postWork(body) {
     return await fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -24,3 +32,4 @@ export async function deleteWork(workId) {
         Authorization: `Bearer ${tokenID}`}
     })
 }
+

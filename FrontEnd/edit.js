@@ -1,5 +1,5 @@
 import { displayWorks, works } from "./works.js";
-import { postWork, deleteWork } from "./apiCall.js";
+import { postWork, deleteWork, getCategories } from "./apiCall.js";
 
 export function editPage() {
     let iconHeader = document.createElement("i");
@@ -87,8 +87,8 @@ function checkFormValidity() {
 
 async function fetchCategories() {
     try {
-      const response = await fetch("http://localhost:5678/api/categories");
-      if (!response.status === 200) {
+      const response = await getCategories()
+      if (!response.ok) {
         throw new Error('Erreur lors de la récupération des catégories');
       }
       const categories = await response.json();
